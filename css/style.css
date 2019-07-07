@@ -1,0 +1,7 @@
+.cool{
+	background-color: #444;
+	transition: background-color 1s;
+}
+.cool.color{ 
+	background-color: #f53;
+}

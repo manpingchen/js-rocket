@@ -1,31 +1,44 @@
+var timer = null;
+var countDownNumber = 10;
 
-		var car = {
-			make: 'vw',
-			type: 'Polo',
-			color: 'white',
-			isTurnedOn: false,
-			numberOfWheels: 4,
-			seats: [
-				'seat 1',
-				'seat 2',
-				'seat 3',
-				'seat 4'
-				],
-			turnOn: function (){
-				this.isTurnedOn = true;
-			},
-			fly: function(){
-				alert('Fly!!');	
-			},
-			switchCar: function(isOn){
-				console.log( 'turn car' + isOn );
-				if( isOn == true ){
-					this.isTurnedOn = true;
-				}else{
-					this.isTurnedOn = false;
-				}
-			}	
-		};
+var changeState = function(state){
 
-		console.log('hello world');
-	
+	document.body.className = 'body-state' + state;
+	clearInterval(timer);
+
+	//For state 1 -  start counting down from 10 everytime and show the '10' as beginning
+	countDownNumber = 10;
+	document.getElementById('countdown').innerHTML = countDownNumber;
+			
+	//countdown
+	if(state == 2){
+		timer = setInterval(function(){
+			countDownNumber = countDownNumber -1;
+			document.getElementById('countdown').innerHTML = countDownNumber;
+			
+			
+			if (countDownNumber <=0) {
+				changeState(3);
+			}
+
+		}, 500)
+
+	} else if(state == 3){
+		var success = setTimeout(function(){
+
+			// randomly success setting
+			var randomNum = Math.round(Math.random()*10);
+			console.log('randomNum', randomNum);
+
+			if (randomNum > 5) {
+				changeState(4); //well done!
+			} else{
+				changeState(5);// oh no!! 
+			}
+
+		},2000);
+		
+	}
+
+
+}
